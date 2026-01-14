@@ -1,20 +1,17 @@
 package application;
 
-import java.time.LocalDate;
+import java.sql.Connection;
 
+import db.DB;
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
-import model.entities.Department;
-import model.entities.Seller;
 
 public class Program {
 
 	public static void main(String[] args) {
 
-		Department dp = new Department(1,"Pharmacy");
-		Seller sll = new Seller(1, "Vic", "Vic@gmail.com", LocalDate.now(), 2500.00, dp);
-		System.out.println(sll);
-		
-		SellerDao sellerDao = DaoFactory.createSellerDao();
+		Connection conn = DB.getConnection();
+		SellerDao seller = DaoFactory.createSellerDao(conn);
+		System.out.println(seller.findById(3));
 	}
 }
