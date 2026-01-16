@@ -12,6 +12,7 @@ public class Program {
 
 		Connection conn = DB.getConnection();
 		SellerDao seller = DaoFactory.createSellerDao(conn);
+		System.out.println("=== TEST 1 seller FindById  ===");
 		System.out.println(seller.findById(3));
 	}
 }
