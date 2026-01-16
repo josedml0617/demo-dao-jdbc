@@ -23,6 +23,10 @@ public class Program {
 		List<Seller> list = DaoFactory.createSellerDao(conn).findByDepartment(dep);
 		list.forEach(System.out::println);
 		
+		System.out.println("\n=== TEST 2 seller FindById  ===");
+		list = DaoFactory.createSellerDao(conn).findAll();
+		list.forEach(System.out::println);
+		
 		DB.closeConnection();
 	}
 }
