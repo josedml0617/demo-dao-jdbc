@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +38,7 @@ public class SellerDaoJDBC implements SellerDao{
 			
 			ps.setString(1, seller.getName());
 			ps.setString(2, seller.getEmail());
-			ps.setDate(3, new java.sql.Date(seller.getBirthDate().getTime()));
+			ps.setTimestamp(3, Timestamp.valueOf((seller.getBirthDate().atStartOfDay())));
 			ps.setDouble(4, seller.getBaseSalary());
 			ps.setInt(5, seller.getDepartment().getId());
 			
@@ -73,7 +74,7 @@ public class SellerDaoJDBC implements SellerDao{
 						"WHERE Id = ?");
 				ps.setString(1, seller.getName());
 				ps.setString(2, seller.getEmail());
-				ps.setDate(3, new java.sql.Date(seller.getBirthDate().getTime()));
+				ps.setTimestamp(3, Timestamp.valueOf(seller.getBirthDate().atStartOfDay()));
 				ps.setDouble(4, seller.getBaseSalary());
 				ps.setInt(5, seller.getDepartment().getId());
 				ps.setInt(6, seller.getId());
@@ -143,7 +144,7 @@ public class SellerDaoJDBC implements SellerDao{
 			obj.setId(rs.getInt("Id"));
 			obj.setName(rs.getString("Name"));
 			obj.setEmail(rs.getString("Email"));
-			obj.setBirthDate(rs.getDate("BirthDate"));
+			obj.setBirthDate(rs.getTimestamp("BirthDate").toLocalDateTime().toLocalDate());
 			obj.setBaseSalary(rs.getDouble("BaseSalary"));
 			obj.setDepartment(dep);
 			return obj;

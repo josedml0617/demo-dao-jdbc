@@ -1,8 +1,10 @@
 package model.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
+
+import model.util.DateFormatter;
 
 public class Seller implements Serializable{
 
@@ -11,7 +13,7 @@ public class Seller implements Serializable{
 	private Integer id;
 	private String name;
 	private String email;
-	private Date birthDate;
+	private LocalDate birthDate;
 	private Double baseSalary;
 	
 	private Department department;
@@ -20,7 +22,7 @@ public class Seller implements Serializable{
 	public Seller() {
 	}
 
-	public Seller(Integer id, String name, String email, Date birthDate, Double baseSalary,
+	public Seller(Integer id, String name, String email, LocalDate birthDate, Double baseSalary,
 			Department department) {
 		this.id = id;
 		this.name = name;
@@ -54,11 +56,11 @@ public class Seller implements Serializable{
 		this.email = email;
 	}
 
-	public Date getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -97,7 +99,13 @@ public class Seller implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Seller [id=" + id + ", name=" + name + ", email=" + email + ", birthDate=" + birthDate + ", baseSalary="
-				+ baseSalary + ", department=" + department + "]";
+		return id + ".  " 
+	+ name 
+	+ "| Email: " 
+	+ email 
+	+ "|Data de nascimento: " 
+	+ birthDate.format(DateFormatter.FMT) + "| Salário base "
+	+ baseSalary + "| Departamento: " 
+	+ department;
 	}
 }
